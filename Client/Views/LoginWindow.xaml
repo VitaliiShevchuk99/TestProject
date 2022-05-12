@@ -1,0 +1,24 @@
+﻿<Window x:Class="Client.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client.Views"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="450" Width="800">
+    <Grid Width="400" Margin="100" Background="CornflowerBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Background="DarkCyan" Text="Login" TextAlignment="Center" FontSize="24" Grid.Row="0"></TextBlock>
+        <TextBlock Background="DarkCyan" Text="Password" TextAlignment="Center" FontSize="24" Grid.Row="2"></TextBlock>
+        <TextBox Name="Login" Background="LightCyan" TextAlignment="Center" FontSize="24" Grid.Row="1"></TextBox>
+        <TextBox Name="Password" Background="LightCyan" TextAlignment="Center" FontSize="24" Grid.Row="3"></TextBox>
+        <Button Content="Login" Grid.Row="5" Background="CornflowerBlue" Click="LoginButton"></Button>
+    </Grid>
+</Window>
