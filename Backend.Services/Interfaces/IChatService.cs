@@ -7,6 +7,6 @@ namespace Backend.Services.Interfaces
     public interface IChatService
     {
         Task AddMessageAsync(ChatMessageDto chatMessage);
-        Task<IEnumerable<ChatMessageDto>> GetAllMessages();
+        Task<IEnumerable<ChatMessageDto>> GetAllMessages(string name);
     }
 }

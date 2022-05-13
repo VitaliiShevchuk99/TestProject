@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using Shared.Dto;
 
 namespace Client
@@ -11,6 +12,11 @@ namespace Client
         {
             LoginedUser = user;
             UserLogined?.Invoke();
+        }
+
+        public static void LoginError()
+        {
+            MessageBox.Show("Pishov nahui");
         }
     }
 }

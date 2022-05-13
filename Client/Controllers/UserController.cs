@@ -28,7 +28,14 @@ namespace Client.Controllers
             var url = "api/User/login";
             var request = new RestRequest(url, Method.POST);
             request.AddJsonBody(user);
-            CurrentSession.LoginUser(JsonConvert.DeserializeObject<LoginResponceDto>(_client.Execute(request).Content));
+            try
+            {
+                CurrentSession.LoginUser(JsonConvert.DeserializeObject<LoginResponceDto>(_client.Execute(request).Content));
+            }
+            catch
+            {
+                CurrentSession.LoginError();
+            }
         }
 
         public IEnumerable<UserDto> GetAllUsers()

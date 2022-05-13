@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Backend.Data.Context;
 using Backend.Data.Models;
@@ -19,10 +20,13 @@ namespace Backend.Repositories.Repositories
 
         public async Task AddMessage(ChatMessageDto chatMessage)
         {
+            var users = await _dbContext.UserModels.ToListAsync();
+            var userss = new List<UserModel>();
+            userss.Add(users.FirstOrDefault(t => t.Login == chatMessage.Name));
+            userss.Add(users.FirstOrDefault(t => t.Login == chatMessage.SenderName));
             var messageDb = new Message
             {
-                ReceiverName = chatMessage.Name,
-                SenderName = chatMessage.SenderName,
+                Users = userss,
                 MessageTime = chatMessage.MessageTime,
                 SendedMessage = chatMessage.Message
             };
@@ -30,19 +34,19 @@ namespace Backend.Repositories.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ChatMessageDto>> GetAllMessages()
+        public async Task<IEnumerable<ChatMessageDto>> GetAllMessages(string name)
         {
             var chatMessageList = new List<ChatMessageDto>();
-            var result = await _dbContext.Messages.ToListAsync();
+            var result = await _dbContext.Messages.Include(t => t.Users).ToListAsync();
             foreach (var message in result)
                 chatMessageList.Add(new ChatMessageDto
                 {
-                    Name = message.ReceiverName,
-                    SenderName = message.SenderName,
+                    Name = message.Users[0].Login,
+                    SenderName = message.Users[1].Login,
                     MessageTime = message.MessageTime,
                     Message = message.SendedMessage
                 });
-            return chatMessageList;
+            return chatMessageList.Where(t=>t.SenderName==name || t.Name == name);
         }
     }
 }

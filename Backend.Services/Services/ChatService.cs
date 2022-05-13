@@ -21,9 +21,9 @@ namespace Backend.Services.Services
             await _chatRepository.AddMessage(chatMessage);
         }
 
-        public async Task<IEnumerable<ChatMessageDto>> GetAllMessages()
+        public async Task<IEnumerable<ChatMessageDto>> GetAllMessages(string name)
         {
-            return await _chatRepository.GetAllMessages();
+            return await _chatRepository.GetAllMessages(name);
         }
     }
 }

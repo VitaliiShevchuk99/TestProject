@@ -15,5 +15,6 @@ namespace Backend.Data.Models
         public int PermissionId { get; set; }
         public PermissionModel Permission { get; set; }
         public List<OrderModel> Orders { get; set; }
+        public List<Message> Messages { get; set; }
     }
 }

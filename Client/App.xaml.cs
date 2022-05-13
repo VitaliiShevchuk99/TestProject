@@ -15,12 +15,6 @@ namespace Client
     public partial class App : Application
     {
         public LoginWindow loginWindow;
-
-        //public App()
-        //{
-        //    ServiceCollection services = new ServiceCollection();
-        //}
-
         protected override void OnStartup(StartupEventArgs e)
         {
             var userController = new UserController();
@@ -49,5 +43,7 @@ namespace Client
             chatWindow.Show();
 
         }
+
+
     }
 }

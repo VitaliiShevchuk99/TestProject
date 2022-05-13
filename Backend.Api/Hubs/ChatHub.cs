@@ -26,7 +26,7 @@ namespace Backend.Api.Hubs
 
         public async Task GetAllMessagesAsync()
         {
-            var messages = await _chatService.GetAllMessages();
+            var messages = await _chatService.GetAllMessages(Context.User?.Identity.Name);
             await Clients.Client(Context.User?.Identity.Name).SendAsync("ReceiveMessagesAsync", messages);
         }
 

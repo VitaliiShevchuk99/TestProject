@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Shared.Dto;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,7 +39,7 @@ namespace Backend.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetAllMessages()
         {
-            return Ok(await _chatService.GetAllMessages());
+            return Ok(await _chatService.GetAllMessages(User.Identity.Name));
         }
 
         // POST api/<UserController>

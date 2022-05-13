@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,8 +11,7 @@ namespace Backend.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string SendedMessage { get; set; }
-        public string SenderName { get; set; }
-        public string ReceiverName { get; set; }
+        public virtual List<UserModel> Users { get; set; }
         public DateTime MessageTime { get; set; }
     }
 }
