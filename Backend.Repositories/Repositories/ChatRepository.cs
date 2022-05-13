@@ -20,10 +20,10 @@ namespace Backend.Repositories.Repositories
 
         public async Task AddMessage(ChatMessageDto chatMessage)
         {
-            var users = await _dbContext.UserModels.ToListAsync();
             var userss = new List<UserModel>();
-            userss.Add(users.FirstOrDefault(t => t.Login == chatMessage.Name));
-            userss.Add(users.FirstOrDefault(t => t.Login == chatMessage.SenderName));
+            userss.Add(await _dbContext.UserModels.FirstOrDefaultAsync(t => t.Login == chatMessage.Name));
+            userss.Add(await _dbContext.UserModels.FirstOrDefaultAsync(t => t.Login == chatMessage.SenderName));
+
             var messageDb = new Message
             {
                 Users = userss,
