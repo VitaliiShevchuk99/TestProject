@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Client.Controllers;
+using Client.ViewModels;
 using Shared.Dto;
 
 namespace Client.Views
@@ -9,20 +10,11 @@ namespace Client.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private readonly UserController _userController;
-        public LoginWindow(UserController userController)
-        {
-            _userController = userController;
+        private readonly LoginViewModel _loginViewModel;
+        public LoginWindow(LoginViewModel loginViewModel)
+        { 
+            DataContext = loginViewModel;
             InitializeComponent();
-        }
-
-        private void LoginButton(object sender, RoutedEventArgs e)
-        {
-            _userController.LoginUser(new UserDto()
-            {
-                Login = Login.Text,
-                Password = Password.Text
-            });
         }
     }
 }

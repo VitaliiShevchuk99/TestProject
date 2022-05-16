@@ -37,7 +37,8 @@ namespace Backend.Repositories.Repositories
         public async Task<IEnumerable<ChatMessageDto>> GetAllMessages(string name)
         {
             var chatMessageList = new List<ChatMessageDto>();
-            var result = await _dbContext.Messages.Include(t => t.Users).ToListAsync();
+            var result = await _dbContext.Messages.Where(t => t.Users.FirstOrDefault(u => u.Login == name) != null)
+                .Include(t => t.Users).ToListAsync();
             foreach (var message in result)
                 chatMessageList.Add(new ChatMessageDto
                 {
@@ -46,7 +47,7 @@ namespace Backend.Repositories.Repositories
                     MessageTime = message.MessageTime,
                     Message = message.SendedMessage
                 });
-            return chatMessageList.Where(t=>t.SenderName==name || t.Name == name);
+            return chatMessageList.Where(t => t.SenderName == name || t.Name == name);
         }
     }
 }

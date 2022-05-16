@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.Views"
+        xmlns:viewModels="clr-namespace:Client.ViewModels"
+        d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="800">
     <Grid Width="400" Margin="100" Background="CornflowerBlue">
@@ -17,8 +19,8 @@
         </Grid.RowDefinitions>
         <TextBlock Background="DarkCyan" Text="Login" TextAlignment="Center" FontSize="24" Grid.Row="0"></TextBlock>
         <TextBlock Background="DarkCyan" Text="Password" TextAlignment="Center" FontSize="24" Grid.Row="2"></TextBlock>
-        <TextBox Name="Login" Background="LightCyan" TextAlignment="Center" FontSize="24" Grid.Row="1"></TextBox>
-        <TextBox Name="Password" Background="LightCyan" TextAlignment="Center" FontSize="24" Grid.Row="3"></TextBox>
-        <Button Content="Login" Grid.Row="5" Background="CornflowerBlue" Click="LoginButton"></Button>
+        <TextBox Name="Login" Text="{Binding LoginName}" Background="LightCyan" TextAlignment="Center" FontSize="24" Grid.Row="1"></TextBox>
+        <TextBox Name="Password" Text="{Binding Password}" Background="LightCyan" TextAlignment="Center" FontSize="24" Grid.Row="3"></TextBox>
+        <Button Command="{Binding LoginCommand }" CommandParameter="{Binding}" Grid.Row="5" Background="CornflowerBlue"></Button>
     </Grid>
 </Window>

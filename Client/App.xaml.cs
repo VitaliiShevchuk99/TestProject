@@ -19,7 +19,8 @@ namespace Client
         {
             var userController = new UserController();
             CurrentSession.UserLogined += StartChat;
-            loginWindow = new LoginWindow(userController);
+
+            loginWindow = new LoginWindow(new LoginViewModel(userController));
             loginWindow.Show();
         }
 

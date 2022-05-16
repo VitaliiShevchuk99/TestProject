@@ -18,8 +18,8 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <ListView Name="ActiveChats" Grid.Row="0" Background="DeepSkyBlue" ItemsSource="{Binding Names}" Width="auto"
-                      Height="auto">
+            <ListView Name="ActiveChats" Visibility="{Binding ActiveChatsVisibility, Mode=TwoWay}" Grid.Row="0" Background="DeepSkyBlue" ItemsSource="{Binding Names}" Width="auto"
+                      Height="auto" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Template">
@@ -40,15 +40,16 @@
                     <DataTemplate>
                         <Button Margin="0 0 0 0"
                                 Content="{Binding}"
+                                CommandParameter="{Binding }"
+                                Command="{Binding Path=DataContext.ChangeUserCommand,ElementName=ActiveChats}"
                                 HorizontalAlignment="Stretch"
-                                Background="DarkCyan"
-                                Click="ChangeUser" />
+                                Background="DarkCyan"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
             <!--select user-->
-            <ListView Name="SelectUser" Grid.Row="0" Background="DeepSkyBlue" ItemsSource="{Binding NewConversationNames}" Width="auto"
+            <ListView Name="SelectUser" Visibility="{Binding SelectUserVisibility, Mode=TwoWay}" Grid.Row="0" Background="DeepSkyBlue" ItemsSource="{Binding NewConversationNames}" Width="auto"
                       Height="auto">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -70,13 +71,14 @@
                     <DataTemplate>
                         <Button Margin="0 0 0 0"
                                 Content="{Binding}"
+                                CommandParameter="{Binding }"
+                                Command="{Binding Path=DataContext.ChangeUserCommand,ElementName=SelectUser}"
                                 HorizontalAlignment="Center"
-                                Background="DarkCyan"
-                                Click="ChangeUser" />
+                                Background="DarkCyan"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Grid.Row="1" Background="Brown" Click="NewConversation" />
+            <Button Grid.Row="1" Background="Brown" Command="{Binding NewConversationCommand}" />
         </Grid>
         <Grid Background="DarkBlue" HorizontalAlignment="Stretch" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -89,7 +91,7 @@
                     <ColumnDefinition Width="40" />
                 </Grid.ColumnDefinitions>
                 <Button Click="SendMessage" Background="CornflowerBlue" HorizontalAlignment="Stretch" Grid.Column="1" />
-                <TextBox Name="MessageBox" Background="AliceBlue" HorizontalAlignment="Stretch" Grid.Column="0" />
+                <TextBox Name="MessageBox"  Text="{Binding MessageToSend}" Background="AliceBlue" HorizontalAlignment="Stretch" Grid.Column="0" />
             </Grid>
 
             <ListView Grid.Row="0" Background="LightSteelBlue" ItemsSource="{Binding MessagesForName}">
